@@ -1,0 +1,11 @@
+{
+    "connection_1": {
+        "name": "connection_1",
+        "type": "google",
+        "host": "abc",
+        "login": "token",
+        "password": "the_token",
+        "port": null,
+        "schema": null
+    }
+}

@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:12.5
+    environment:
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_DB: 'airflow'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+  airflow-webserver:
+    build: .
+    volumes:
+      - ./:/home
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    command: ["airflow", "webserver"]
+  airflow-scheduler:
+    build: .
+    volumes:
+      - ./:/home
+    depends_on:
+      - db
+    command: ["airflow", "scheduler"]
+
+volumes:
+  postgres_data:
