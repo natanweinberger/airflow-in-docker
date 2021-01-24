@@ -1,5 +1,8 @@
 version: '3.8'
 
+# Raspberry Pi may only support docker-compose version 3.3
+# version: '3.3'
+
 services:
   db:
     image: postgres:12.5
@@ -12,7 +15,9 @@ services:
     ports:
       - "5432:5432"
   airflow-webserver:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - ./:/home
     ports:
@@ -24,7 +29,9 @@ services:
       PYTHONPATH: /home
       AIRFLOW_HOME: /home
   airflow-scheduler:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - ./:/home
     depends_on:
