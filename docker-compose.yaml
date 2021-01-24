@@ -20,6 +20,9 @@ services:
     depends_on:
       - db
     command: ["airflow", "webserver"]
+    environment:
+      PYTHONPATH: /home
+      AIRFLOW_HOME: /home
   airflow-scheduler:
     build: .
     volumes:
@@ -27,6 +30,9 @@ services:
     depends_on:
       - db
     command: ["airflow", "scheduler"]
+    environment:
+      PYTHONPATH: /home
+      AIRFLOW_HOME: /home
 
 volumes:
   postgres_data:
